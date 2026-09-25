@@ -26,7 +26,7 @@
   },
   {
     "id": "A2",
-    "text": "Qual é a sua idade? ______ anos. (se não souber: 18–29 · 30–44 · 45–59 · 60+)",
+    "text": "Qual é a sua idade?",
     "var": "idade",
     "star": false,
     "options": [],
@@ -143,14 +143,14 @@
       },
       {
         "value": 1,
-        "label": "Sim → qual? ____________________ (quilombola, indígena, ribeirinho, etc.)"
+        "label": "Sim → qual? (quilombola, indígena, ribeirinho, etc.)"
       }
     ],
     "type": "single"
   },
   {
     "id": "A6",
-    "text": "Quantas pessoas moram na residência, incluindo você? ______ ________________________________",
+    "text": "Quantas pessoas moram na residência, incluindo você?",
     "var": "comp_fam",
     "star": false,
     "options": [],
@@ -158,7 +158,7 @@
   },
   {
     "id": "A7",
-    "text": "Quantas pessoas da residência participam da atividade produtiva? ______ ________________________________",
+    "text": "Quantas pessoas da residência participam da atividade produtiva?",
     "var": "comp_ativ",
     "star": false,
     "options": [],
@@ -212,7 +212,7 @@
   },
   {
     "id": "A9a",
-    "text": "Quantos:  Masculino [ ____ ]   Feminino [ ____ ] ________________________________   var: filhos_m / filhos_f",
+    "text": "Quantos:  Masculino?   Feminino?   var: filhos_m / filhos_f",
     "var": "filhos_m/filhos_f",
     "star": false,
     "options": [],
@@ -257,7 +257,7 @@
   },
   {
     "id": "A11",
-    "text": "[CAMPO ABERTO] Como a atividade começou na família?",
+    "text": "Como a atividade começou na família?",
     "var": "a_aberto",
     "star": false,
     "options": [],
@@ -308,7 +308,7 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "single"
@@ -341,7 +341,7 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "single"
@@ -370,7 +370,7 @@
       },
       {
         "value": 5,
-        "label": "Outra: ____________"
+        "label": "Outra:"
       }
     ],
     "type": "single"
@@ -549,7 +549,7 @@
       },
       {
         "value": 1,
-        "label": "Sim → como funciona? ____________________"
+        "label": "Sim → como funciona? "
       }
     ],
     "type": "single"
@@ -590,7 +590,7 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "single"
@@ -613,7 +613,7 @@
   },
   {
     "id": "C4",
-    "text": "Qual o preço médio recebido?  R$ ____________ por ____________ (unidade)",
+    "text": "Qual o preço médio recebido?  R$ por (unidade)",
     "var": "preco_medio",
     "star": false,
     "options": [],
@@ -750,7 +750,7 @@
       },
       {
         "value": 7,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "multi"
@@ -808,7 +808,7 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "single"
@@ -1007,7 +1007,7 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "multi"
@@ -1150,7 +1150,7 @@
       },
       {
         "value": 3,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "multi"
@@ -1296,7 +1296,7 @@
       },
       {
         "value": 5,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "multi"
@@ -1354,7 +1354,7 @@
       },
       {
         "value": 5,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "single"
@@ -1390,7 +1390,7 @@
   },
   {
     "id": "D10",
-    "text": "[CAMPO ABERTO] Qual ação governamental considera mais importante para a atividade?",
+    "text": "Qual ação governamental considera mais importante para a atividade?",
     "var": "d_aberto",
     "star": false,
     "options": [],
@@ -1445,7 +1445,7 @@
       },
       {
         "value": 7,
-        "label": "Outra: ____________"
+        "label": "Outra:"
       }
     ],
     "type": "multi"
@@ -1669,14 +1669,14 @@
       },
       {
         "value": 6,
-        "label": "Outro: ____________"
+        "label": "Outro:"
       }
     ],
     "type": "multi"
   },
   {
     "id": "E7",
-    "text": "[CAMPO ABERTO] Qual sua percepção das condições ambientais atuais em relação ao passado?",
+    "text": "Qual sua percepção das condições ambientais atuais em relação ao passado?",
     "var": "e_aberto",
     "star": false,
     "options": [],
@@ -1975,7 +1975,7 @@
   },
   {
     "id": "F12",
-    "text": "[CAMPO ABERTO] Qual a sua expectativa na atividade para os próximos anos?",
+    "text": "Qual a sua expectativa na atividade para os próximos anos?",
     "var": "f_aberto",
     "star": false,
     "options": [],
@@ -1993,7 +1993,7 @@
       },
       {
         "value": 1,
-        "label": "Sim → qual(is)? ____________________"
+        "label": "Sim → qual(is)?"
       }
     ],
     "type": "single"
@@ -2039,7 +2039,7 @@
       },
       {
         "value": 1,
-        "label": "Sim → responda G3a; qual instituição? ____________________"
+        "label": "Sim → responda G3a; qual instituição?"
       }
     ],
     "type": "single"
@@ -2075,7 +2075,7 @@
   },
   {
     "id": "G4",
-    "text": "[CAMPO ABERTO] Que inovações poderiam fortalecer a cadeia?",
+    "text": "Que inovações poderiam fortalecer a cadeia?",
     "var": "g_aberto",
     "star": false,
     "options": [],
