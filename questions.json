@@ -1,0 +1,2084 @@
+[
+  {
+    "id": "A1",
+    "text": "Qual é o seu sexo?",
+    "var": "sexo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Feminino"
+      },
+      {
+        "value": 2,
+        "label": "Masculino"
+      },
+      {
+        "value": 3,
+        "label": "Não-binário"
+      },
+      {
+        "value": 4,
+        "label": "Prefiro não declarar"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A2",
+    "text": "Qual é a sua idade? ______ anos. (se não souber: 18–29 · 30–44 · 45–59 · 60+)",
+    "var": "idade",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "A3",
+    "text": "Qual é a sua situação conjugal?",
+    "var": "conjugal",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Solteiro(a)"
+      },
+      {
+        "value": 2,
+        "label": "Casado(a) / União estável"
+      },
+      {
+        "value": 3,
+        "label": "Separado(a) / Divorciado(a)"
+      },
+      {
+        "value": 4,
+        "label": "Viúvo(a)"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A4",
+    "text": "Qual é a sua escolaridade?",
+    "var": "escolar",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sem escolaridade"
+      },
+      {
+        "value": 2,
+        "label": "Fundamental incompleto"
+      },
+      {
+        "value": 3,
+        "label": "Fundamental completo"
+      },
+      {
+        "value": 4,
+        "label": "Médio incompleto"
+      },
+      {
+        "value": 5,
+        "label": "Médio completo"
+      },
+      {
+        "value": 6,
+        "label": "Superior incompleto"
+      },
+      {
+        "value": 7,
+        "label": "Superior completo"
+      },
+      {
+        "value": 8,
+        "label": "Pós-graduação"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A5",
+    "text": "Qual a sua cor ou raça (padrão IBGE)?",
+    "var": "raca_cor",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Branca"
+      },
+      {
+        "value": 2,
+        "label": "Preta"
+      },
+      {
+        "value": 3,
+        "label": "Parda"
+      },
+      {
+        "value": 4,
+        "label": "Amarela"
+      },
+      {
+        "value": 5,
+        "label": "Indígena"
+      },
+      {
+        "value": 7,
+        "label": "Prefiro não declarar"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A5a",
+    "text": "Pertence a algum povo ou comunidade tradicional?",
+    "var": "pct",
+    "star": false,
+    "options": [
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 1,
+        "label": "Sim → qual? ____________________ (quilombola, indígena, ribeirinho, etc.)"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A6",
+    "text": "Quantas pessoas moram na residência, incluindo você? ______ ________________________________",
+    "var": "comp_fam",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "A7",
+    "text": "Quantas pessoas da residência participam da atividade produtiva? ______ ________________________________",
+    "var": "comp_ativ",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "A8",
+    "text": "Qual o tempo de atuação na cadeia produtiva?",
+    "var": "tempo_cadeia",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Menos de 1 ano"
+      },
+      {
+        "value": 2,
+        "label": "1 a 5 anos"
+      },
+      {
+        "value": 3,
+        "label": "6 a 10 anos"
+      },
+      {
+        "value": 4,
+        "label": "11 a 20 anos"
+      },
+      {
+        "value": 5,
+        "label": "Mais de 20 anos"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A9",
+    "text": "Possui filhos?",
+    "var": "filhos",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda A9a"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para A10"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A9a",
+    "text": "Quantos:  Masculino [ ____ ]   Feminino [ ____ ] ________________________________   var: filhos_m / filhos_f",
+    "var": "filhos_m/filhos_f",
+    "star": false,
+    "options": [],
+    "type": "compound",
+    "fields": [
+      {
+        "name": "filhos_m",
+        "label": "Masculino",
+        "type": "number"
+      },
+      {
+        "name": "filhos_f",
+        "label": "Feminino",
+        "type": "number"
+      }
+    ]
+  },
+  {
+    "id": "A10",
+    "text": "Existe um plano de sucessão familiar para a atividade?",
+    "var": "sucessao",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim, os filhos vão assumir"
+      },
+      {
+        "value": 2,
+        "label": "Sim, parentes vão assumir"
+      },
+      {
+        "value": 3,
+        "label": "Não haverá sucessão"
+      },
+      {
+        "value": 4,
+        "label": "Ainda não foi discutido"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "A11",
+    "text": "[CAMPO ABERTO] Como a atividade começou na família?",
+    "var": "a_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "B1",
+    "text": "É filiado(a) a alguma organização coletiva relacionada à atividade?",
+    "var": "filia_assoc",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda B2 a B11"
+      },
+      {
+        "value": 0,
+        "label": "Não → responda B1a e pule para o MÓDULO C"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B1a",
+    "text": "Motivo principal da não filiação:",
+    "var": "motivo_naofilia",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Não existe organização"
+      },
+      {
+        "value": 2,
+        "label": "Falta de confiança"
+      },
+      {
+        "value": 3,
+        "label": "Custos"
+      },
+      {
+        "value": 4,
+        "label": "Distância"
+      },
+      {
+        "value": 5,
+        "label": "Falta de interesse"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B2",
+    "text": "Tipo de entidade:",
+    "var": "tipo_entidade",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Colônia"
+      },
+      {
+        "value": 2,
+        "label": "Associação"
+      },
+      {
+        "value": 3,
+        "label": "Cooperativa"
+      },
+      {
+        "value": 4,
+        "label": "Sindicato"
+      },
+      {
+        "value": 5,
+        "label": "Movimento social (ex.: MIQCB — Quebradeiras de Coco Babaçu)"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B3",
+    "text": "Função desempenhada na organização:",
+    "var": "funcao_assoc",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Presidente"
+      },
+      {
+        "value": 2,
+        "label": "Diretoria / Conselho de Administração"
+      },
+      {
+        "value": 3,
+        "label": "Conselheiro(a) fiscal"
+      },
+      {
+        "value": 4,
+        "label": "Sócio(a) / associado(a)"
+      },
+      {
+        "value": 5,
+        "label": "Outra: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B4",
+    "text": "Em que grau você se sente parte desta organização / comunidade produtiva?",
+    "var": "org_belong",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito baixo"
+      },
+      {
+        "value": 2,
+        "label": "Baixo"
+      },
+      {
+        "value": 3,
+        "label": "Médio"
+      },
+      {
+        "value": 4,
+        "label": "Alto"
+      },
+      {
+        "value": 5,
+        "label": "Muito alto"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B5",
+    "text": "Com que frequência você participa das reuniões e decisões coletivas da sua organização?",
+    "var": "partic_freq",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nunca"
+      },
+      {
+        "value": 2,
+        "label": "Raramente"
+      },
+      {
+        "value": 3,
+        "label": "Às vezes"
+      },
+      {
+        "value": 4,
+        "label": "Frequentemente"
+      },
+      {
+        "value": 5,
+        "label": "Sempre"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B6",
+    "text": "Comercializa sua produção por meio da organização coletiva?",
+    "var": "comerc_org",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B7",
+    "text": "Como considera a transparência financeira (prestação de contas e uso do dinheiro) da gestão da organização?",
+    "var": "transp_org",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Péssima"
+      },
+      {
+        "value": 2,
+        "label": "Ruim"
+      },
+      {
+        "value": 3,
+        "label": "Regular"
+      },
+      {
+        "value": 4,
+        "label": "Boa"
+      },
+      {
+        "value": 5,
+        "label": "Excelente"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B8",
+    "text": "Como considera sua influência nas decisões da organização?",
+    "var": "influencia_dec",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nenhuma influência"
+      },
+      {
+        "value": 2,
+        "label": "Pouca"
+      },
+      {
+        "value": 3,
+        "label": "Média"
+      },
+      {
+        "value": 4,
+        "label": "Muita"
+      },
+      {
+        "value": 5,
+        "label": "Total influência"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B9",
+    "text": "Como avalia os benefícios que a participação na organização traz para sua família?",
+    "var": "benef_org",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nenhum"
+      },
+      {
+        "value": 2,
+        "label": "Pouco"
+      },
+      {
+        "value": 3,
+        "label": "Moderado"
+      },
+      {
+        "value": 4,
+        "label": "Muito"
+      },
+      {
+        "value": 5,
+        "label": "Muito alto"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B10",
+    "text": "A organização tem mecanismos formais para resolver conflitos entre membros?",
+    "var": "mecan_conflito",
+    "star": false,
+    "options": [
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 1,
+        "label": "Sim → como funciona? ____________________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "B11",
+    "text": "[CAMPO ABERTO] Qual o maior desafio da organização de que participa?",
+    "var": "b_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "C1",
+    "text": "Qual a condição de uso ou posse da área/recurso (terra, lago ou campo)?",
+    "var": "posse",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Proprietário (com título da terra)"
+      },
+      {
+        "value": 2,
+        "label": "Posseiro / Ocupante (área particular sem título definitivo)"
+      },
+      {
+        "value": 3,
+        "label": "Concessionário / Assentado (concessão do governo)"
+      },
+      {
+        "value": 4,
+        "label": "Uso comum / coletivo (manejo comunitário)"
+      },
+      {
+        "value": 5,
+        "label": "Parceria / Meação"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C2",
+    "text": "Qual a dimensão da unidade produtiva ou área de manejo?",
+    "var": "dimensao",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "C3",
+    "text": "Qual o volume médio de produção por mês?",
+    "var": "prod_volume",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "C4",
+    "text": "Qual o preço médio recebido?  R$ ____________ por ____________ (unidade)",
+    "var": "preco_medio",
+    "star": false,
+    "options": [],
+    "type": "number"
+  },
+  {
+    "id": "C5",
+    "text": "Como o preço é definido?",
+    "var": "preco_definicao",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Pelos compradores (licitação, contrato, etc.)"
+      },
+      {
+        "value": 2,
+        "label": "Pelo produtor/extrativista"
+      },
+      {
+        "value": 3,
+        "label": "Pelo comprador, sem interferência do produtor"
+      },
+      {
+        "value": 4,
+        "label": "Pelos vendedores, em acordo coletivo"
+      },
+      {
+        "value": 5,
+        "label": "Negociação direta"
+      },
+      {
+        "value": 6,
+        "label": "Referência de outros canais (CEASA, etc.)"
+      },
+      {
+        "value": 7,
+        "label": "Outro canal"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C6",
+    "text": "O preço que recebo pela minha produção é justo.",
+    "var": "preco_justo",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Discordo totalmente"
+      },
+      {
+        "value": 2,
+        "label": "Discordo"
+      },
+      {
+        "value": 3,
+        "label": "Nem concordo nem discordo"
+      },
+      {
+        "value": 4,
+        "label": "Concordo"
+      },
+      {
+        "value": 5,
+        "label": "Concordo totalmente"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C7",
+    "text": "Em que grau você depende de intermediários ou atravessadores para vender sua produção?",
+    "var": "depend_intermed",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito baixo"
+      },
+      {
+        "value": 2,
+        "label": "Baixo"
+      },
+      {
+        "value": 3,
+        "label": "Médio"
+      },
+      {
+        "value": 4,
+        "label": "Alto"
+      },
+      {
+        "value": 5,
+        "label": "Muito alto"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C8",
+    "text": "Como o produto é vendido? (marque todas as que se aplicam)",
+    "var": "forma_venda",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "In natura"
+      },
+      {
+        "value": 2,
+        "label": "Processado (filé, farinha, polpa, etc.)"
+      },
+      {
+        "value": 3,
+        "label": "Congelado ou resfriado"
+      },
+      {
+        "value": 4,
+        "label": "Amêndoas ou sementes"
+      },
+      {
+        "value": 5,
+        "label": "Óleo, azeite ou derivados"
+      },
+      {
+        "value": 6,
+        "label": "Artesanato"
+      },
+      {
+        "value": 7,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "C9",
+    "text": "Qual o destino principal dos seus produtos?",
+    "var": "destino",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Local (consumo próprio ou feiras locais)"
+      },
+      {
+        "value": 2,
+        "label": "Regional (cidades vizinhas ou atravessadores)"
+      },
+      {
+        "value": 3,
+        "label": "Nacional (outros estados ou e-commerce)"
+      },
+      {
+        "value": 4,
+        "label": "Internacional (exportação)"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C10",
+    "text": "Onde comercializa a maior parte dos seus produtos?",
+    "var": "canal",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Atravessador"
+      },
+      {
+        "value": 2,
+        "label": "Consumidor final"
+      },
+      {
+        "value": 3,
+        "label": "Cooperativa"
+      },
+      {
+        "value": 4,
+        "label": "Feiras"
+      },
+      {
+        "value": 5,
+        "label": "Programa governamental (mercados institucionais)"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C11",
+    "text": "Possui contrato formal de venda?",
+    "var": "contrato",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C12",
+    "text": "O produto possui algum selo ou reconhecimento oficial? (marque todas)",
+    "var": "selo",
+    "star": false,
+    "options": [
+      {
+        "value": 0,
+        "label": "Nenhum"
+      },
+      {
+        "value": 1,
+        "label": "Orgânico"
+      },
+      {
+        "value": 2,
+        "label": "Indicação Geográfica (IG)"
+      },
+      {
+        "value": 3,
+        "label": "Comércio Justo / Fair Trade"
+      },
+      {
+        "value": 4,
+        "label": "Selo de Manejo Sustentável"
+      },
+      {
+        "value": 5,
+        "label": "Selo Nacional da Agricultura Familiar (SENAF)"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "C13",
+    "text": "Possui algum selo sanitário / de inspeção do produto? (marque todas)",
+    "var": "insp",
+    "star": false,
+    "options": [
+      {
+        "value": 0,
+        "label": "Não possui"
+      },
+      {
+        "value": 1,
+        "label": "SIM — Serviço de Inspeção Municipal"
+      },
+      {
+        "value": 2,
+        "label": "SIE — Serviço de Inspeção Estadual"
+      },
+      {
+        "value": 3,
+        "label": "SIF — Serviço de Inspeção Federal"
+      },
+      {
+        "value": 4,
+        "label": "Selo Arte / SISBI-POA"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "C14",
+    "text": "Percebe alguma dificuldade de logística na comercialização?",
+    "var": "logistica",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nenhuma"
+      },
+      {
+        "value": 2,
+        "label": "Pouca"
+      },
+      {
+        "value": 3,
+        "label": "Média"
+      },
+      {
+        "value": 4,
+        "label": "Muita"
+      },
+      {
+        "value": 5,
+        "label": "Extrema"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "C15",
+    "text": "[CAMPO ABERTO] Quais os principais gargalos na comercialização?",
+    "var": "c_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "D1",
+    "text": "Possui Cadastro Nacional da Agricultura Familiar (CAF) ativo?",
+    "var": "caf",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D2",
+    "text": "Possui documento de autorização ou identificação para exercer a atividade?",
+    "var": "doc_ativ",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda D2a"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para D3"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D2a",
+    "text": "Qual(is) documento(s)? (marque todas)",
+    "var": "doc_tipo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "RGP / Carteira de Pescador Profissional (pirarucu)"
+      },
+      {
+        "value": 2,
+        "label": "Protocolo de Manejo de Pirarucu (IBAMA / órgão estadual)"
+      },
+      {
+        "value": 3,
+        "label": "TAUS ou Cadastro de Quebradeira de Coco Babaçu"
+      },
+      {
+        "value": 4,
+        "label": "Licença de Coleta/Transporte de Capim Dourado (Naturatins)"
+      },
+      {
+        "value": 5,
+        "label": "CAR de Povos e Comunidades Tradicionais (CAR/CPT)"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "D3",
+    "text": "Possui licença ambiental?",
+    "var": "lic_amb",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 2,
+        "label": "Em processo"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D4",
+    "text": "Possui outorga ou autorização de uso de recursos naturais?",
+    "var": "outorga",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda D4a a D4c"
+      },
+      {
+        "value": 2,
+        "label": "Em processo → responda D4a a D4c"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para D5"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D4a",
+    "text": "Recurso ÁGUA (tanques, lagos, irrigação):",
+    "var": "outorga_agua",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim (possui)"
+      },
+      {
+        "value": 2,
+        "label": "Em processo"
+      },
+      {
+        "value": 0,
+        "label": "Não possui / Não se aplica"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D4b",
+    "text": "Recurso FLORESTA / FLORA (coleta de palha, manejo):",
+    "var": "outorga_flora",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim (possui)"
+      },
+      {
+        "value": 2,
+        "label": "Em processo"
+      },
+      {
+        "value": 0,
+        "label": "Não possui / Não se aplica"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D4c",
+    "text": "Recurso SOLO / TERRA:",
+    "var": "outorga_solo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim (possui)"
+      },
+      {
+        "value": 2,
+        "label": "Em processo"
+      },
+      {
+        "value": 0,
+        "label": "Não possui / Não se aplica"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D5",
+    "text": "Já forneceu produtos para programas governamentais?",
+    "var": "forn_gov",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda D5a"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para D6"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D5a",
+    "text": "Para quais programas? (marque todas)",
+    "var": "prog_tipo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "PAA"
+      },
+      {
+        "value": 2,
+        "label": "PNAE"
+      },
+      {
+        "value": 3,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "D6",
+    "text": "Já participou da PGPM-Bio (Garantia de Preços Mínimos da Sociobiodiversidade)?",
+    "var": "pgpm",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 8,
+        "label": "Não sabe"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D7",
+    "text": "Recebeu ATER (assistência técnica) no último ano?",
+    "var": "ater",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda D7a e D7b"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para D8"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D7a",
+    "text": "Qual a origem da ATER? (marque todas)",
+    "var": "ater_origem",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Governo"
+      },
+      {
+        "value": 2,
+        "label": "Própria"
+      },
+      {
+        "value": 3,
+        "label": "Cooperativas"
+      },
+      {
+        "value": 4,
+        "label": "Empresa privada"
+      },
+      {
+        "value": 5,
+        "label": "ONG"
+      },
+      {
+        "value": 6,
+        "label": "Sistema S"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "D7b",
+    "text": "Em que grau você avalia positivamente a assistência técnica (ATER) recebida?",
+    "var": "ater_qualid",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito ruim"
+      },
+      {
+        "value": 2,
+        "label": "Ruim"
+      },
+      {
+        "value": 3,
+        "label": "Regular"
+      },
+      {
+        "value": 4,
+        "label": "Boa"
+      },
+      {
+        "value": 5,
+        "label": "Muito boa"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D8",
+    "text": "Já acessou crédito para a atividade?",
+    "var": "credito",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda D8a e D8b"
+      },
+      {
+        "value": 0,
+        "label": "Não → responda D8c"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D8a",
+    "text": "Qual a fonte principal do crédito? (marque todas)",
+    "var": "credito_fonte",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "PRONAF / crédito rural"
+      },
+      {
+        "value": 2,
+        "label": "Banco comercial"
+      },
+      {
+        "value": 3,
+        "label": "Cooperativa de crédito"
+      },
+      {
+        "value": 4,
+        "label": "Crédito informal"
+      },
+      {
+        "value": 5,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "D8b",
+    "text": "Como avalia a dificuldade de acesso ao crédito?",
+    "var": "credito_dific",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito fácil"
+      },
+      {
+        "value": 2,
+        "label": "Fácil"
+      },
+      {
+        "value": 3,
+        "label": "Regular"
+      },
+      {
+        "value": 4,
+        "label": "Difícil"
+      },
+      {
+        "value": 5,
+        "label": "Muito difícil"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D8c",
+    "text": "Qual o motivo de não acessar o crédito?",
+    "var": "credito_motivo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Não precisou"
+      },
+      {
+        "value": 2,
+        "label": "Falta de documentação"
+      },
+      {
+        "value": 3,
+        "label": "Excesso de burocracia"
+      },
+      {
+        "value": 4,
+        "label": "Medo de endividamento"
+      },
+      {
+        "value": 5,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D9",
+    "text": "Em que grau você avalia positivamente as políticas públicas de apoio à sua atividade?",
+    "var": "pp_efetiv",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito baixo"
+      },
+      {
+        "value": 2,
+        "label": "Baixo"
+      },
+      {
+        "value": 3,
+        "label": "Médio"
+      },
+      {
+        "value": 4,
+        "label": "Alto"
+      },
+      {
+        "value": 5,
+        "label": "Muito alto"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "D10",
+    "text": "[CAMPO ABERTO] Qual ação governamental considera mais importante para a atividade?",
+    "var": "d_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "E1",
+    "text": "Adota práticas sustentáveis na atividade?",
+    "var": "pratica_sust",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda E1a"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para E2"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E1a",
+    "text": "Quais práticas adota? (marque todas)",
+    "var": "sust_tipo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Pousio ou descanso de áreas"
+      },
+      {
+        "value": 2,
+        "label": "Proteção de nascentes e matas ciliares"
+      },
+      {
+        "value": 3,
+        "label": "Planejamento da extração/captura"
+      },
+      {
+        "value": 4,
+        "label": "Controle de queimadas ou aceiros"
+      },
+      {
+        "value": 5,
+        "label": "Monitoramento e vigilância territorial"
+      },
+      {
+        "value": 6,
+        "label": "Intervenção para repovoamento"
+      },
+      {
+        "value": 7,
+        "label": "Outra: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "E2",
+    "text": "Como você avalia o impacto da sua atividade produtiva sobre o meio ambiente?",
+    "var": "impacto_amb",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito negativo"
+      },
+      {
+        "value": 2,
+        "label": "Negativo"
+      },
+      {
+        "value": 3,
+        "label": "Neutro"
+      },
+      {
+        "value": 4,
+        "label": "Positivo"
+      },
+      {
+        "value": 5,
+        "label": "Muito positivo"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E3",
+    "text": "Você percebeu mudanças ambientais (clima, espécies, água) na sua região nos últimos 10 anos?",
+    "var": "mud_amb",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nenhuma"
+      },
+      {
+        "value": 2,
+        "label": "Poucas"
+      },
+      {
+        "value": 3,
+        "label": "Algumas"
+      },
+      {
+        "value": 4,
+        "label": "Muitas"
+      },
+      {
+        "value": 5,
+        "label": "Muitíssimas"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E4a",
+    "text": "ÁGUA:",
+    "var": "disp_agua",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito escassa"
+      },
+      {
+        "value": 2,
+        "label": "Escassa"
+      },
+      {
+        "value": 3,
+        "label": "Suficiente"
+      },
+      {
+        "value": 4,
+        "label": "Abundante"
+      },
+      {
+        "value": 5,
+        "label": "Muito abundante"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E4b",
+    "text": "FLORESTA:",
+    "var": "disp_floresta",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito escassa"
+      },
+      {
+        "value": 2,
+        "label": "Escassa"
+      },
+      {
+        "value": 3,
+        "label": "Suficiente"
+      },
+      {
+        "value": 4,
+        "label": "Abundante"
+      },
+      {
+        "value": 5,
+        "label": "Muito abundante"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E4c",
+    "text": "SOLO:",
+    "var": "disp_solo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito escassa"
+      },
+      {
+        "value": 2,
+        "label": "Escassa"
+      },
+      {
+        "value": 3,
+        "label": "Suficiente"
+      },
+      {
+        "value": 4,
+        "label": "Abundante"
+      },
+      {
+        "value": 5,
+        "label": "Muito abundante"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E5",
+    "text": "Qual a importância da preservação ambiental para a sua atividade?",
+    "var": "import_amb",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Nada importante"
+      },
+      {
+        "value": 2,
+        "label": "Pouco importante"
+      },
+      {
+        "value": 3,
+        "label": "Importante"
+      },
+      {
+        "value": 4,
+        "label": "Muito importante"
+      },
+      {
+        "value": 5,
+        "label": "Essencial"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E6",
+    "text": "Existem conflitos ambientais relacionados à sua atividade?",
+    "var": "conflito_amb",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim → responda E6a"
+      },
+      {
+        "value": 0,
+        "label": "Não → pule para E7"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "E6a",
+    "text": "Qual a origem principal dos conflitos? (marque todas)",
+    "var": "conflito_tipo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Com a fauna local"
+      },
+      {
+        "value": 2,
+        "label": "Com turismo / outras atividades"
+      },
+      {
+        "value": 3,
+        "label": "Com outros produtores"
+      },
+      {
+        "value": 4,
+        "label": "Com a fiscalização ambiental"
+      },
+      {
+        "value": 5,
+        "label": "Com grandes empreendimentos"
+      },
+      {
+        "value": 6,
+        "label": "Outro: ____________"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "E7",
+    "text": "[CAMPO ABERTO] Qual sua percepção das condições ambientais atuais em relação ao passado?",
+    "var": "e_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "F1",
+    "text": "Em qual faixa se encontra a renda mensal total da família (em salários mínimos — SM)?",
+    "var": "renda_fam",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Menos de 0,5 SM"
+      },
+      {
+        "value": 2,
+        "label": "0,5 a 1 SM"
+      },
+      {
+        "value": 3,
+        "label": "1 a 2 SM"
+      },
+      {
+        "value": 4,
+        "label": "2 a 3 SM"
+      },
+      {
+        "value": 5,
+        "label": "Mais de 3 SM"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F2",
+    "text": "Qual a proporção aproximada da renda que vem desta atividade?",
+    "var": "prop_renda",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Menos de 25%"
+      },
+      {
+        "value": 2,
+        "label": "25% a 49%"
+      },
+      {
+        "value": 3,
+        "label": "50% a 74%"
+      },
+      {
+        "value": 4,
+        "label": "75% a 99%"
+      },
+      {
+        "value": 5,
+        "label": "100% (única renda)"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F3",
+    "text": "Qual a dependência da renda desta atividade?",
+    "var": "depend_renda",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Baixa (complementar)"
+      },
+      {
+        "value": 2,
+        "label": "Média-baixa"
+      },
+      {
+        "value": 3,
+        "label": "Média"
+      },
+      {
+        "value": 4,
+        "label": "Alta"
+      },
+      {
+        "value": 5,
+        "label": "Total"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F4",
+    "text": "Quais outras fontes de renda compõem o orçamento familiar? (marque todas)",
+    "var": "fonte_renda",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Trabalho informal (diárias na roça, faxinas, lavagem de roupa, cozinha, cuidados)"
+      },
+      {
+        "value": 2,
+        "label": "Beneficiamento e artesanato (óleo, sabão, carvão, doces, farinhas, biojoias, palha)"
+      },
+      {
+        "value": 3,
+        "label": "Produção para consumo e venda (quintais, frutas/hortas, ovos, pequenos animais)"
+      },
+      {
+        "value": 4,
+        "label": "Transferência de renda (Bolsa Família, Seguro-Defeso, Auxílio Gás, Salário-Maternidade)"
+      },
+      {
+        "value": 5,
+        "label": "Aposentadorias e pensões (idade, morte ou invalidez)"
+      },
+      {
+        "value": 6,
+        "label": "Outras (emprego fixo, revenda por catálogo, aluguéis, remessas de parentes)"
+      },
+      {
+        "value": 0,
+        "label": "Nenhuma outra fonte"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "F5",
+    "text": "O produto da atividade contribui para a alimentação da família?",
+    "var": "autoconsumo",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F6",
+    "text": "Recebe algum benefício previdenciário? (marque todas)",
+    "var": "prev",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Aposentadoria"
+      },
+      {
+        "value": 2,
+        "label": "Seguro-Defeso"
+      },
+      {
+        "value": 3,
+        "label": "BPC"
+      },
+      {
+        "value": 4,
+        "label": "Auxílio-doença"
+      },
+      {
+        "value": 0,
+        "label": "Nenhum"
+      }
+    ],
+    "type": "multi"
+  },
+  {
+    "id": "F7",
+    "text": "Nos últimos 2 anos, a renda proveniente desta atividade:",
+    "var": "tend_renda",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Diminuiu muito"
+      },
+      {
+        "value": 2,
+        "label": "Diminuiu"
+      },
+      {
+        "value": 3,
+        "label": "Ficou igual"
+      },
+      {
+        "value": 4,
+        "label": "Aumentou"
+      },
+      {
+        "value": 5,
+        "label": "Aumentou muito"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F8",
+    "text": "Possui dívidas relacionadas à atividade?",
+    "var": "dividas",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F9",
+    "text": "Fez investimentos na atividade nos últimos 3 anos?",
+    "var": "investiu",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Sim"
+      },
+      {
+        "value": 0,
+        "label": "Não"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F10",
+    "text": "Qual o seu nível de satisfação atual com as suas condições de vida?",
+    "var": "satisf",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito insatisfeito"
+      },
+      {
+        "value": 2,
+        "label": "Insatisfeito"
+      },
+      {
+        "value": 3,
+        "label": "Neutro"
+      },
+      {
+        "value": 4,
+        "label": "Satisfeito"
+      },
+      {
+        "value": 5,
+        "label": "Muito satisfeito"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F11",
+    "text": "Deseja permanecer na atividade?",
+    "var": "permanecer",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Desejo sair em breve"
+      },
+      {
+        "value": 2,
+        "label": "Penso em sair"
+      },
+      {
+        "value": 3,
+        "label": "Indiferente"
+      },
+      {
+        "value": 4,
+        "label": "Desejo continuar"
+      },
+      {
+        "value": 5,
+        "label": "Quero permanecer"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "F12",
+    "text": "[CAMPO ABERTO] Qual a sua expectativa na atividade para os próximos anos?",
+    "var": "f_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  },
+  {
+    "id": "G1",
+    "text": "Utiliza internet ou plataformas digitais (WhatsApp, Instagram, marketplaces) para comercializar?",
+    "var": "venda_digital",
+    "star": false,
+    "options": [
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 1,
+        "label": "Sim → qual(is)? ____________________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "G2",
+    "text": "Em que grau as inovações introduzidas (técnicas, ferramentas, certificações) melhoraram sua renda?",
+    "var": "inov_renda",
+    "star": true,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito baixo"
+      },
+      {
+        "value": 2,
+        "label": "Baixo"
+      },
+      {
+        "value": 3,
+        "label": "Médio"
+      },
+      {
+        "value": 4,
+        "label": "Alto"
+      },
+      {
+        "value": 5,
+        "label": "Muito alto"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "G3",
+    "text": "Sua organização tem parcerias ativas com universidades ou centros de pesquisa?",
+    "var": "parceria_univ",
+    "star": true,
+    "options": [
+      {
+        "value": 0,
+        "label": "Não"
+      },
+      {
+        "value": 1,
+        "label": "Sim → responda G3a; qual instituição? ____________________"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "G3a",
+    "text": "Como você avalia a qualidade dessa parceria?",
+    "var": "parceria_qualid",
+    "star": false,
+    "options": [
+      {
+        "value": 1,
+        "label": "Muito ruim"
+      },
+      {
+        "value": 2,
+        "label": "Ruim"
+      },
+      {
+        "value": 3,
+        "label": "Regular"
+      },
+      {
+        "value": 4,
+        "label": "Boa"
+      },
+      {
+        "value": 5,
+        "label": "Muito boa"
+      }
+    ],
+    "type": "single"
+  },
+  {
+    "id": "G4",
+    "text": "[CAMPO ABERTO] Que inovações poderiam fortalecer a cadeia?",
+    "var": "g_aberto",
+    "star": false,
+    "options": [],
+    "type": "text"
+  }
+]

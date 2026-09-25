@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Entrevista Sociobiodiversidade — coleta offline">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/styles.css">
+<title>Entrevista Sociobiodiversidade</title>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div><strong>🎙️ Entrevista Sociobiodiversidade</strong><small>Coleta offline</small></div>
+  <div id="network" class="network offline">● Offline</div>
+</header>
+<main>
+<section id="home" class="screen">
+  <div class="hero card">
+    <span class="pill">PWA • OFFLINE-FIRST</span>
+    <h1>Coleta por voz no Chrome</h1>
+    <p>Respostas e gravações são salvas no aparelho. A entrevista pode continuar mesmo sem internet.</p>
+    <button id="newInterview" class="primary">＋ Nova entrevista</button>
+    <button id="openSettings" class="secondary">⚙ Configurações</button>
+  </div>
+  <div class="card">
+    <div class="section-title"><h2>Entrevistas neste aparelho</h2><button id="refreshList" class="iconbtn">↻</button></div>
+    <div class="stats" id="stats"></div>
+    <div class="management">
+      <button id="exportAll" class="secondary">⬇ Backup completo</button>
+      <button id="importBtn" class="secondary">⬆ Restaurar backup</button>
+      <button id="exportAllCsv" class="secondary">📊 CSV geral</button>
+      <button id="syncBtn" class="secondary">☁ Sincronizar pendentes</button>
+      <input id="importFile" type="file" accept="application/json" hidden>
+    </div>
+    <p id="homeMsg" class="msg"></p>
+    <div id="interviewList" class="list"></div>
+  </div>
+</section>
+
+<section id="settings" class="screen hidden">
+  <div class="card">
+    <div class="stephead"><span>CONFIGURAÇÕES</span><button id="backSettings" class="backHome">← Voltar</button></div>
+    <h2>Sincronização</h2>
+    <p class="note">Opcional. Informe um endpoint HTTPS que aceite POST JSON. A coleta continua funcionando normalmente sem servidor.</p>
+    <label class="field"><span>URL de sincronização</span><input id="syncUrl" placeholder="https://seu-servidor/api/sincronizar"></label>
+    <button id="saveSettings" class="primary">Salvar configuração</button>
+    <p id="settingsMsg" class="msg"></p>
+  </div>
+</section>
+
+<section id="setup" class="screen hidden">
+  <div class="card">
+    <div class="stephead"><span>CONFIGURAÇÃO</span><button class="backHome">← Voltar</button></div>
+    <h2>Identificação da coleta</h2>
+    <div class="grid">
+      <label>Código do questionário<input id="id_quest" autocomplete="off"></label>
+      <label>Data<input id="data" type="date"></label>
+      <label>Entrevistador(a)<input id="entrevistador" autocomplete="name"></label>
+      <label>Município<input id="municipio"></label>
+      <label>Comunidade/Localidade<input id="comunidade"></label>
+      <label>Tipo de local<select id="tipo_local"><option value="">Selecione</option><option value="1">Urbana</option><option value="2">Rural</option><option value="3">Comunidade ribeirinha</option><option value="4">Assentamento rural</option><option value="5">Terra indígena</option><option value="6">Outro</option></select></label>
+      <label>Coordenadas GPS<input id="gps" placeholder="Opcional — usar localização do aparelho"></label>
+      <label>★ Cadeia produtiva (filtro mestre)<select id="cadeia"><option value="">Selecione</option><option value="1">Pirarucu</option><option value="2">Babaçu</option><option value="3">Capim Dourado</option><option value="4">Guayusa (Equador)</option></select></label>
+    </div>
+    <div class="consent">
+      <h3>Consentimento Livre e Esclarecido (TCLE)</h3>
+      <p>Leia o TCLE ao/à respondente antes de qualquer pergunta. Não registre o nome do(a) respondente neste formulário. O consentimento pode ser oral ou por escrito.</p>
+      <label>Consentimento registrado?<select id="consent"><option value="">Selecione</option><option value="1">1 — Sim, oral</option><option value="2">2 — Sim, por escrito</option><option value="0">0 — Não — encerrar</option></select></label>
+      <label class="check"><input id="audioConsent" type="checkbox"> Autorizou a gravação de áudio das respostas.</label>
+    </div>
+    <div class="actions-inline"><button id="gpsBtn" class="secondary">📍 Capturar GPS</button><button id="startInterview" class="primary">Iniciar entrevista</button></div>
+    <p id="setupMsg" class="msg"></p>
+  </div>
+</section>
+
+<section id="survey" class="screen hidden">
+  <div class="surveybar card">
+    <div><span id="moduleLabel" class="pill"></span><span id="questionCount"></span></div>
+    <div class="progress"><div id="progressBar"></div></div>
+  </div>
+  <div class="card question-card">
+    <div class="qcode" id="qcode"></div>
+    <h2 id="qtext"></h2>
+    <p id="qnote" class="note"></p>
+    <div id="answerArea"></div>
+    <div class="voice-tools">
+      <button id="speakBtn" class="secondary">🔊 Ouvir pergunta</button>
+      <button id="micBtn" class="mic">🎤 Responder por voz</button>
+      <button id="recordBtn" class="secondary">⏺ Gravar áudio</button>
+    </div>
+    <div id="voiceStatus" class="voice-status"></div>
+    <div id="heard" class="heard"></div>
+    <div id="audioState" class="audio-state"></div>
+    <div class="survey-actions"><button id="prevBtn" class="secondary">← Voltar</button><button id="saveBtn" class="secondary">💾 Salvar</button><button id="nextBtn" class="primary">Salvar e continuar →</button></div>
+  </div>
+</section>
+
+<section id="finish" class="screen hidden">
+  <div class="card success-card">
+    <span class="pill">ENTREVISTA CONCLUÍDA</span>
+    <h1>Coleta salva no aparelho.</h1>
+    <p id="finishMeta"></p>
+    <div class="summary" id="finishSummary"></div>
+    <div class="button-stack"><button id="exportJson" class="primary">⬇ Exportar JSON</button><button id="exportCsv" class="secondary">⬇ Exportar CSV</button><button id="exportAudios" class="secondary">🎧 Exportar áudios</button><button id="backHomeFinish" class="secondary">Voltar ao início</button></div>
+  </div>
+</section>
+</main>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
