@@ -212,7 +212,7 @@
   },
   {
     "id": "A9a",
-    "text": "Quantos:  Masculino?   Feminino?   var: filhos_m / filhos_f",
+    "text": "Quantos:  Masculino?   Feminino?",
     "var": "filhos_m/filhos_f",
     "star": false,
     "options": [],
@@ -931,7 +931,7 @@
   },
   {
     "id": "C15",
-    "text": "[CAMPO ABERTO] Quais os principais gargalos na comercialização?",
+    "text": "Quais os principais gargalos na comercialização?",
     "var": "c_aberto",
     "star": false,
     "options": [],
