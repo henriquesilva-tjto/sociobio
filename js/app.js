@@ -3,6 +3,12 @@ import { visibleQuestions } from './rules.js';
 import { $, show, hide, downloadBlob, escapeCsv, blobToBase64, base64ToBlob } from './ui.js';
 import { getSession, signIn, signUp, signOut, saveSupabaseConfig, syncInterview } from './supabase-rest.js';
 
+// Configuração do Supabase Client usando a SDK oficial
+const SUPABASE_URL = 'https://gyxrmasketpbwrftmfuc.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_D_vIJkjBQ4-Ozo1-xpeulw_9PSBV3VM';
+
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
+
 const modules = {
   A: 'Perfil sociodemográfico', B: 'Organização socioprodutiva', C: 'Produção e comercialização',
   D: 'Políticas públicas e crédito', E: 'Sustentabilidade ambiental', F: 'Renda e reprodução socioeconômica',
@@ -48,16 +54,11 @@ async function renderList() {
 
 function resetSetup() {
   $('setupMsg').textContent = '';
-  $('id_quest').value = '';
-  $('data').value = new Date().toISOString().slice(0, 10);
-  $('entrevistador').value = '';
-  $('municipio').value = '';
-  $('comunidade').value = '';
-  $('tipo_local').value = '';
-  $('gps').value = '';
-  $('cadeia').value = '';
-  $('consent').value = '';
-  $('audioConsent').checked = false;
+  $('id_quest').value = '';$('data').value = new Date().toISOString().slice(0, 10);
+  $('entrevistador').value = '';$('municipio').value = '';
+  $('comunidade').value = '';$('tipo_local').value = '';
+  $('gps').value = '';$('cadeia').value = '';
+  $('consent').value = '';$('audioConsent').checked = false;
 }
 
 async function startNewInterview() {
@@ -67,13 +68,13 @@ async function startNewInterview() {
 async function startInterview() {
   const consent = $('consent').value;
   if (!['1', '2'].includes(consent)) { $('setupMsg').textContent = 'Registre o consentimento antes de iniciar.'; return; }
-  if (!$('cadeia').value) { $('setupMsg').textContent = 'Selecione a cadeia produtiva.'; return; }
+  if (!$('cadeia').value) {$('setupMsg').textContent = 'Selecione a cadeia produtiva.'; return; }
   state.interview = {
     id: uid(), createdAt: Date.now(), updatedAt: Date.now(), status: 'in_progress', syncStatus: 'pending',
     meta: {
-      id_quest: $('id_quest').value.trim() || uid(), data: $('data').value, entrevistador: $('entrevistador').value.trim(),
-      municipio: $('municipio').value.trim(), comunidade: $('comunidade').value.trim(), tipo_local: $('tipo_local').value,
-      gps: $('gps').value, cadeia: $('cadeia').value, cadeiaLabel: $('cadeia').selectedOptions[0]?.text || '', consent,
+      id_quest: $('id_quest').value.trim() || uid(), data: $('data').value, entrevistador:$('entrevistador').value.trim(),
+      municipio: $('municipio').value.trim(), comunidade: $('comunidade').value.trim(), tipo_local:$('tipo_local').value,
+      gps: $('gps').value, cadeia: $('cadeia').value, cadeiaLabel:$('cadeia').selectedOptions[0]?.text || '', consent,
       audio_authorized: $('audioConsent').checked
     }, answers: {}
   };
@@ -94,13 +95,12 @@ function renderQuestion() {
   state.visible = visibleQuestions(state.questions, state.interview.answers || {});
   if (state.index >= state.visible.length) { finishInterview(); return; }
   const q = current();
-  $('moduleLabel').textContent = moduleOf(q);
-  $('questionCount').textContent = `${state.index + 1} / ${state.visible.length}`;
+  $('moduleLabel').textContent = moduleOf(q);$('questionCount').textContent = `${state.index + 1} / ${state.visible.length}`;
   $('progressBar').style.width = `${((state.index + 1) / state.visible.length) * 100}%`;
   $('qcode').textContent = (q.star ? '★ ' : '') + q.id;
   $('qtext').textContent = q.text;
   $('qnote').textContent = q.star ? 'Pergunta comparável — não alterar enunciado nem escala.' : '';
-  $('answerArea').innerHTML = ''; $('heard').textContent = ''; $('voiceStatus').textContent = ''; $('audioState').textContent = '';
+  $('answerArea').innerHTML = '';$('heard').textContent = ''; $('voiceStatus').textContent = '';$('audioState').textContent = '';
   renderAnswer(q); updateNav();
 }
 
@@ -220,7 +220,7 @@ async function refreshAuthPanel(){
   const box=$('authStatus');
   if(!box) return;
   box.innerHTML=s?.user?.email ? `<b>Conectado</b><br>${s.user.email}<br><button id="logoutBtn" class="secondary">Sair</button>` : '<b>Não conectado</b><br>Entre para enviar as entrevistas ao banco central.';
-  if($('logoutBtn')) $('logoutBtn').onclick=async()=>{await signOut(); await refreshAuthPanel();};
+  if($('logoutBtn'))$('logoutBtn').onclick=async()=>{await signOut(); await refreshAuthPanel();};
 }
 
 async function init() {
@@ -240,24 +240,28 @@ async function init() {
   window.addEventListener('offline', setNetwork);
   $('newInterview').onclick = startNewInterview;
   $('refreshList').onclick = renderList;
-  $('openSettings').onclick = async () => { hide('home'); show('settings'); const u=await getSetting('supabaseUrl'); const k=await getSetting('supabasePublishableKey'); $('supabaseUrl').value=u?.value||''; $('supabaseKey').value=k?.value||''; await refreshAuthPanel(); };
-  $('backSettings').onclick = () => { hide('settings'); show('home'); renderList(); };
-  $('saveSettings').onclick = async () => { await saveSupabaseConfig($('supabaseUrl').value.trim(), $('supabaseKey').value.trim()); $('settingsMsg').textContent = 'Configuração Supabase salva neste aparelho.'; };
+  $('openSettings').onclick = async () => { 
+    hide('home'); show('settings'); 
+    const u = await getSetting('supabaseUrl'); 
+    const k = await getSetting('supabasePublishableKey'); 
+    $('supabaseUrl').value = u?.value || SUPABASE_URL; 
+    $('supabaseKey').value = k?.value || SUPABASE_PUBLISHABLE_KEY; 
+    await refreshAuthPanel(); 
+  };
+  $('backSettings').onclick = () => { hide('settings'); show('home'); renderList(); };$('saveSettings').onclick = async () => { 
+    await saveSupabaseConfig($('supabaseUrl').value.trim(), $('supabaseKey').value.trim());$('settingsMsg').textContent = 'Configuração Supabase salva neste aparelho.'; 
+  };
   document.querySelectorAll('.backHome').forEach(b => b.onclick = () => { hide('setup'); show('home'); renderList(); });
-  $('gpsBtn').onclick = () => { if (!navigator.geolocation) { $('setupMsg').textContent = 'Geolocalização não disponível.'; return; } navigator.geolocation.getCurrentPosition(p => { $('gps').value = `${p.coords.latitude.toFixed(6)}, ${p.coords.longitude.toFixed(6)}`; }, () => $('setupMsg').textContent = 'Não foi possível obter a localização.'); };
-  $('consent').onchange = e => { if (e.target.value === '0') $('setupMsg').textContent = 'Sem consentimento, a aplicação deve ser encerrada.'; else $('setupMsg').textContent = ''; };
-  $('startInterview').onclick = startInterview;
-  $('saveBtn').onclick = async () => { await persist(); $('voiceStatus').textContent = '✓ Salvo neste aparelho.'; };
-  $('prevBtn').onclick = () => { if (state.index > 0) { state.index--; renderQuestion(); } };
-  $('nextBtn').onclick = async () => { await persist(); state.index++; renderQuestion(); };
+  $('gpsBtn').onclick = () => { if (!navigator.geolocation) {$('setupMsg').textContent = 'Geolocalização não disponível.'; return; } navigator.geolocation.getCurrentPosition(p => { $('gps').value = `${p.coords.latitude.toFixed(6)}, ${p.coords.longitude.toFixed(6)}`; }, () => $('setupMsg').textContent = 'Não foi possível obter a localização.'); };
+  $('consent').onchange = e => { if (e.target.value === '0')$('setupMsg').textContent = 'Sem consentimento, a aplicação deve ser encerrada.'; else $('setupMsg').textContent = ''; };$('startInterview').onclick = startInterview;
+  $('saveBtn').onclick = async () => { await persist();$('voiceStatus').textContent = '✓ Salvo neste aparelho.'; };
+  $('prevBtn').onclick = () => { if (state.index > 0) { state.index--; renderQuestion(); } };$('nextBtn').onclick = async () => { await persist(); state.index++; renderQuestion(); };
   $('speakBtn').onclick = () => speak($('qtext').textContent);
-  $('micBtn').onclick = () => { if (!state.recognition) state.recognition = setupRecognition(); if (!state.recognition) { $('voiceStatus').textContent = 'Este Chrome não disponibilizou reconhecimento de fala. Use a gravação de áudio.'; return; } try { state.recognition.start(); } catch (e) {} };
+  $('micBtn').onclick = () => { if (!state.recognition) state.recognition = setupRecognition(); if (!state.recognition) {$('voiceStatus').textContent = 'Este Chrome não disponibilizou reconhecimento de fala. Use a gravação de áudio.'; return; } try { state.recognition.start(); } catch (e) {} };
   $('recordBtn').onclick = toggleRecording;
   $('exportJson').onclick = exportCurrentJson; $('exportCsv').onclick = exportCurrentCsv; $('exportAudios').onclick = exportCurrentAudios;
-  $('backHomeFinish').onclick = async () => { hide('finish'); show('home'); await renderList(); };
-  $('exportAll').onclick = async () => { const data = await allData(); const audios = []; for (const a of data.audios) audios.push({ ...a, blob: await blobToBase64(a.blob) }); const backup = { format: 'sociobio-backup-v1', createdAt: new Date().toISOString(), interviews: data.interviews, audios }; downloadBlob(new Blob([JSON.stringify(backup)], { type: 'application/json' }), `backup_sociobiodiversidade_${new Date().toISOString().slice(0, 10)}.json`); $('homeMsg').textContent = `Backup criado: ${data.interviews.length} entrevistas e ${audios.length} áudios.`; };
-  $('importBtn').onclick = () => $('importFile').click();
-  $('importFile').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { const payload = JSON.parse(await file.text()); if (payload.format !== 'sociobio-backup-v1') throw new Error('Formato inválido'); const audios = (payload.audios || []).map(a => ({ ...a, blob: base64ToBlob(a.blob, a.mime || 'audio/webm') })); await importData({ interviews: payload.interviews || [], audios }); $('homeMsg').textContent = `Backup restaurado: ${(payload.interviews || []).length} entrevistas.`; await renderList(); } catch (err) { $('homeMsg').textContent = 'Não foi possível restaurar o backup: ' + err.message; } e.target.value = ''; };
+  $('backHomeFinish').onclick = async () => { hide('finish'); show('home'); await renderList(); };$('exportAll').onclick = async () => { const data = await allData(); const audios = []; for (const a of data.audios) audios.push({ ...a, blob: await blobToBase64(a.blob) }); const backup = { format: 'sociobio-backup-v1', createdAt: new Date().toISOString(), interviews: data.interviews, audios }; downloadBlob(new Blob([JSON.stringify(backup)], { type: 'application/json' }), `backup_sociobiodiversidade_${new Date().toISOString().slice(0, 10)}.json`); $('homeMsg').textContent = `Backup criado: ${data.interviews.length} entrevistas e ${audios.length} áudios.`; };
+  $('importBtn').onclick = () => $('importFile').click();$('importFile').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { const payload = JSON.parse(await file.text()); if (payload.format !== 'sociobio-backup-v1') throw new Error('Formato inválido'); const audios = (payload.audios || []).map(a => ({ ...a, blob: base64ToBlob(a.blob, a.mime || 'audio/webm') })); await importData({ interviews: payload.interviews || [], audios }); $('homeMsg').textContent = `Backup restaurado: ${(payload.interviews || []).length} entrevistas.`; await renderList(); } catch (err) { $('homeMsg').textContent = 'Não foi possível restaurar o backup: ' + err.message; } e.target.value = ''; };
   $('exportAllCsv').onclick = async () => { const items = await listInterviews(); const rows = [['entrevista_id', 'codigo', 'data', 'entrevistador', 'municipio', 'comunidade', 'cadeia', 'status', 'sync_status', 'variavel', 'resposta']]; for (const it of items) for (const [k, v] of Object.entries(it.answers || {})) rows.push([it.id, it.meta.id_quest, it.meta.data, it.meta.entrevistador, it.meta.municipio, it.meta.comunidade, it.meta.cadeiaLabel, it.status, it.syncStatus, k, Array.isArray(v) ? v.join('|') : v]); downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(escapeCsv).join(';')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'entrevistas_sociobiodiversidade.csv'); $('homeMsg').textContent = `CSV geral criado com ${items.length} entrevistas.`; };
   $('syncBtn').onclick = syncPending;
   $('loginBtn').onclick = async()=>{try{await signIn($('authEmail').value.trim(),$('authPassword').value);$('settingsMsg').textContent='Login realizado.';await refreshAuthPanel();}catch(e){$('settingsMsg').textContent='Falha no login: '+e.message;}};
