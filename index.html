@@ -42,10 +42,17 @@
 <section id="settings" class="screen hidden">
   <div class="card">
     <div class="stephead"><span>CONFIGURAÇÕES</span><button id="backSettings" class="backHome">← Voltar</button></div>
-    <h2>Sincronização</h2>
-    <p class="note">Opcional. Informe um endpoint HTTPS que aceite POST JSON. A coleta continua funcionando normalmente sem servidor.</p>
-    <label class="field"><span>URL de sincronização</span><input id="syncUrl" placeholder="https://seu-servidor/api/sincronizar"></label>
+    <h2>Banco central — Supabase</h2>
+    <p class="note">A coleta continua offline. Quando houver internet, as entrevistas pendentes serão enviadas ao banco central. Use a URL e a chave publicável do seu projeto Supabase.</p>
+    <label class="field"><span>Project URL</span><input id="supabaseUrl" placeholder="https://seu-projeto.supabase.co"></label>
+    <label class="field"><span>Publishable key</span><input id="supabaseKey" type="password" placeholder="sb_publishable_..."></label>
     <button id="saveSettings" class="primary">Salvar configuração</button>
+    <hr>
+    <h3>Acesso do entrevistador</h3>
+    <div id="authStatus" class="note">Verificando...</div>
+    <label class="field"><span>E-mail</span><input id="authEmail" type="email" autocomplete="email"></label>
+    <label class="field"><span>Senha</span><input id="authPassword" type="password" autocomplete="current-password"></label>
+    <div class="actions-inline"><button id="loginBtn" class="primary">Entrar</button><button id="signupBtn" class="secondary">Criar acesso</button></div>
     <p id="settingsMsg" class="msg"></p>
   </div>
 </section>

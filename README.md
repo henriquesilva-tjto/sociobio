@@ -1,48 +1,31 @@
-# Entrevista Sociobiodiversidade — PWA offline
+# Entrevista Sociobiodiversidade — PWA + Supabase
 
-PWA para Chrome Android baseada no QUESTIONÁRIO DE CARACTERIZAÇÃO SOCIOECONÔMICA — Instrumento I1.
+Aplicativo web/PWA para Chrome Android, com coleta offline e sincronização com banco central Supabase.
 
 ## Recursos
-- coleta offline após a primeira abertura em HTTPS;
+- coleta offline após primeira abertura em HTTPS;
 - IndexedDB local para entrevistas e áudios;
-- painel de entrevistas em andamento/concluídas;
+- painel de entrevistas;
 - salvamento automático e retomada;
-- exclusão controlada de entrevistas;
-- backup completo em JSON, incluindo áudios em Base64;
-- restauração de backup;
-- CSV geral de todas as entrevistas;
-- exportação individual de JSON/CSV/áudios;
-- contador de pendências de sincronização;
-- endpoint opcional HTTPS para sincronização posterior;
-- TTS em português;
-- reconhecimento de fala quando disponibilizado pelo Chrome;
+- backup/restauração;
+- CSV geral;
 - gravação de áudio por pergunta;
-- regras condicionais A–G;
+- TTS e reconhecimento de fala quando disponíveis no Chrome;
 - GPS opcional;
-- interface responsiva para celular.
+- regras condicionais A–G;
+- autenticação Supabase por e-mail e senha;
+- sincronização das entrevistas pendentes;
+- upload dos áudios para Storage;
+- RLS para restringir os dados ao usuário autenticado.
 
-## Uso local
-1. Abra a pasta no VS Code.
-2. Use Live Server para testar no computador.
-3. Para uso no celular, publique em HTTPS.
-4. Abra o endereço no Chrome Android uma primeira vez com internet.
-5. Depois disso, o aplicativo e os dados já armazenados podem continuar sendo usados sem conexão.
+## Publicação
+O endereço do aplicativo pode continuar sendo:
 
-## Backup
-Na tela inicial:
-- **Backup completo** cria um JSON com entrevistas + áudios.
-- **Restaurar backup** importa esse JSON.
-- **CSV geral** exporta todas as respostas em uma única planilha CSV.
+`https://henriquesilva-tjto.github.io/sociobio/`
 
-O backup pode ficar grande porque os áudios são incorporados ao JSON em Base64. Para coletas extensas, recomenda-se fazer backups por período ou implementar um servidor de sincronização.
+O GitHub Pages serve apenas a aplicação. O banco central é o Supabase.
 
-## Sincronização
-Em Configurações pode ser informado um endpoint HTTPS. O aplicativo enviará cada entrevista pendente por POST JSON. O servidor deve devolver HTTP 2xx para que a entrevista seja marcada como sincronizada.
-
-O aplicativo **não exige servidor para coletar**. Sem endpoint ou sem internet, as entrevistas permanecem locais e aparecem como pendentes.
+Consulte `SUPABASE_CONFIG.md` e execute `supabase_schema.sql` no projeto Supabase antes de sincronizar.
 
 ## Segurança
-Para uso institucional, publique somente em HTTPS e defina uma política de backup/retention. O armazenamento local do navegador não deve ser tratado como único mecanismo de preservação de dados.
-
-## Versão corrigida
-Esta versão foi revisada para corrigir a inicialização da pesquisa, navegação, carregamento das perguntas e conclusão da entrevista.
+Use somente a Publishable key no navegador. Nunca exponha Secret/service_role key. As tabelas usam Row Level Security e cada usuário acessa apenas suas próprias entrevistas. O bucket de áudio deve ser privado.
