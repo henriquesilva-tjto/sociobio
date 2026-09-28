@@ -141,8 +141,25 @@ function updateNav() { $('prevBtn').disabled = state.index === 0; }
 async function persist() { if (!state.interview) return; state.interview.updatedAt = Date.now(); state.interview.syncStatus = 'pending'; await putInterview(state.interview); }
 
 function speak(text) {
-  if (!('speechSynthesis' in window)) { $('voiceStatus').textContent = 'Síntese de voz não disponível.'; return; }
-  speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'pt-BR'; u.rate = .95; speechSynthesis.speak(u);
+  if (!('speechSynthesis' in window)) { 
+    $('voiceStatus').textContent = 'Síntese de voz não disponível.'; 
+    return; 
+  }
+
+  // Limpa caracteres especiais como underlines, asteriscos, travessões e múltiplos espaços
+  const textClean = text
+    .replace(/_/g, ' ')          // Substitui underlines por espaço para não ler "underline"
+    .replace(/[*#~]/g, '')        // Remove caracteres de formatação markdown
+    .replace(/[-–—]{2,}/g, ' ')   // Remove traços/hífens repetidos
+    .replace(/\s+/g, ' ')         // Remove espaços duplicados
+    .trim();
+
+  speechSynthesis.cancel(); // Para qualquer leitura anterior
+  
+  const u = new SpeechSynthesisUtterance(textClean); 
+  u.lang = 'pt-BR'; 
+  u.rate = 0.95; 
+  speechSynthesis.speak(u);
 }
 
 function setupRecognition() {
