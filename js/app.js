@@ -3,11 +3,9 @@ import { visibleQuestions } from './rules.js';
 import { $, show, hide, downloadBlob, escapeCsv, blobToBase64, base64ToBlob } from './ui.js';
 import { getSession, signIn, signUp, signOut, saveSupabaseConfig, syncInterview } from './supabase-rest.js';
 
-// Configuração do Supabase Client usando a SDK oficial
+// Configurações Padrão
 const SUPABASE_URL = 'https://gyxrmasketpbwrftmfuc.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_D_vIJkjBQ4-Ozo1-xpeulw_9PSBV3VM';
-
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
 
 const modules = {
   A: 'Perfil sociodemográfico', B: 'Organização socioprodutiva', C: 'Produção e comercialização',
@@ -21,8 +19,9 @@ function uid() { return 'INT-' + Date.now().toString(36).toUpperCase() + '-' + M
 function moduleOf(q) { return modules[q.id[0]] || 'Questionário'; }
 function setNetwork() {
   const on = navigator.onLine;
-  $('network').textContent = on ? '● Online' : '● Offline';
-  $('network').className = 'network ' + (on ? 'online' : 'offline');
+  if ($('network')) {$('network').textContent = on ? '● Online' : '● Offline';
+    $('network').className = 'network ' + (on ? 'online' : 'offline');
+  }
 }
 
 async function homeStats() {
@@ -30,11 +29,13 @@ async function homeStats() {
   const pending = items.filter(x => x.syncStatus !== 'synced').length;
   const completed = items.filter(x => x.status === 'completed').length;
   const inProgress = items.filter(x => x.status !== 'completed').length;
-  $('stats').innerHTML = `<div><b>${items.length}</b><small>Total</small></div><div><b>${completed}</b><small>Concluídas</small></div><div><b>${inProgress}</b><small>Em andamento</small></div><div><b>${pending}</b><small>Pendentes</small></div>`;
+  if ($('stats')) {$('stats').innerHTML = `<div><b>${items.length}</b><small>Total</small></div><div><b>${completed}</b><small>Concluídas</small></div><div><b>${inProgress}</b><small>Em andamento</small></div><div><b>${pending}</b><small>Pendentes</small></div>`;
+  }
 }
 
 async function renderList() {
   const list = $('interviewList');
+  if (!list) return;
   const items = await listInterviews();
   await homeStats();
   if (!items.length) { list.innerHTML = '<p class="note">Nenhuma entrevista salva neste aparelho.</p>'; return; }
@@ -53,12 +54,17 @@ async function renderList() {
 }
 
 function resetSetup() {
-  $('setupMsg').textContent = '';
-  $('id_quest').value = '';$('data').value = new Date().toISOString().slice(0, 10);
-  $('entrevistador').value = '';$('municipio').value = '';
-  $('comunidade').value = '';$('tipo_local').value = '';
-  $('gps').value = '';$('cadeia').value = '';
-  $('consent').value = '';$('audioConsent').checked = false;
+  if ($('setupMsg'))$('setupMsg').textContent = '';
+  if ($('id_quest'))$('id_quest').value = '';
+  if ($('data'))$('data').value = new Date().toISOString().slice(0, 10);
+  if ($('entrevistador'))$('entrevistador').value = '';
+  if ($('municipio'))$('municipio').value = '';
+  if ($('comunidade'))$('comunidade').value = '';
+  if ($('tipo_local'))$('tipo_local').value = '';
+  if ($('gps'))$('gps').value = '';
+  if ($('cadeia'))$('cadeia').value = '';
+  if ($('consent'))$('consent').value = '';
+  if ($('audioConsent'))$('audioConsent').checked = false;
 }
 
 async function startNewInterview() {
@@ -194,33 +200,41 @@ async function exportCurrentCsv() { const rows = [['entrevista_id', 'codigo', 'v
 async function exportCurrentAudios() { const audios = await getAudios(state.interview.id); for (let i = 0; i < audios.length; i++) downloadBlob(audios[i].blob, `${state.interview.meta.id_quest}_${audios[i].questionId}_${i + 1}.webm`); }
 
 async function syncPending() {
-  if (!navigator.onLine) { $('homeMsg').textContent = 'Sem internet. As entrevistas continuam armazenadas localmente.'; return; }
-  const session = await getSession();
-  if (!session?.access_token) { $('homeMsg').textContent = 'Faça login em Configurações para sincronizar.'; return; }
-  const pending = (await listInterviews()).filter(x => x.syncStatus !== 'synced');
-  if (!pending.length) { $('homeMsg').textContent = 'Não há entrevistas pendentes.'; return; }
-  let ok = 0;
-  for (const it of pending) {
-    try {
-      const audios = await getAudios(it.id);
-      await syncInterview(it, audios);
-      await markSynced(it.id);
-      ok++;
-    } catch (e) {
-      $('homeMsg').textContent = `Sincronização interrompida em ${ok} de ${pending.length}: ${e.message}`;
-      break;
+  if (!navigator.onLine) { if ($('homeMsg'))$('homeMsg').textContent = 'Sem internet. As entrevistas continuam armazenadas localmente.'; return; }
+  try {
+    const session = await getSession();
+    if (!session?.access_token) { if ($('homeMsg'))$('homeMsg').textContent = 'Faça login em Configurações para sincronizar.'; return; }
+    const pending = (await listInterviews()).filter(x => x.syncStatus !== 'synced');
+    if (!pending.length) { if ($('homeMsg'))$('homeMsg').textContent = 'Não há entrevistas pendentes.'; return; }
+    let ok = 0;
+    for (const it of pending) {
+      try {
+        const audios = await getAudios(it.id);
+        await syncInterview(it, audios);
+        await markSynced(it.id);
+        ok++;
+      } catch (e) {
+        if ($('homeMsg'))$('homeMsg').textContent = `Sincronização interrompida em ${ok} de ${pending.length}: ${e.message}`;
+        break;
+      }
     }
+    if (ok === pending.length && $('homeMsg'))$('homeMsg').textContent = `Sincronização concluída: ${ok} entrevista(s).`;
+    await renderList();
+  } catch(e) {
+    if ($('homeMsg'))$('homeMsg').textContent = 'Erro ao sincronizar: ' + e.message;
   }
-  if (ok === pending.length) $('homeMsg').textContent = `Sincronização concluída: ${ok} entrevista(s).`;
-  await renderList();
 }
 
 async function refreshAuthPanel(){
-  const s=await getSession();
   const box=$('authStatus');
   if(!box) return;
-  box.innerHTML=s?.user?.email ? `<b>Conectado</b><br>${s.user.email}<br><button id="logoutBtn" class="secondary">Sair</button>` : '<b>Não conectado</b><br>Entre para enviar as entrevistas ao banco central.';
-  if($('logoutBtn'))$('logoutBtn').onclick=async()=>{await signOut(); await refreshAuthPanel();};
+  try {
+    const s=await getSession();
+    box.innerHTML=s?.user?.email ? `<b>Conectado</b><br>${s.user.email}<br><button id="logoutBtn" class="secondary">Sair</button>` : '<b>Não conectado</b><br>Entre para enviar as entrevistas ao banco central.';
+    if($('logoutBtn'))$('logoutBtn').onclick=async()=>{await signOut(); await refreshAuthPanel();};
+  } catch(e) {
+    box.innerHTML = '<b>Desconectado</b>';
+  }
 }
 
 async function init() {
@@ -229,43 +243,53 @@ async function init() {
     if (!response.ok) throw new Error('Não foi possível carregar o questionário.');
     state.questions = await response.json();
   } catch (e) {
-    $('homeMsg').textContent = 'Erro ao carregar as perguntas. Abra o aplicativo por HTTPS ou por um servidor local.';
-    return;
+    if ($('homeMsg'))$('homeMsg').textContent = 'Erro ao carregar as perguntas. Abra o aplicativo por HTTPS ou por um servidor local.';
   }
 
-  $('data').value = new Date().toISOString().slice(0, 10);
-  setNetwork(); await renderList();
+  if ($('data'))$('data').value = new Date().toISOString().slice(0, 10);
+  setNetwork(); 
+  await renderList();
 
   window.addEventListener('online', async () => { setNetwork(); await homeStats(); });
   window.addEventListener('offline', setNetwork);
-  $('newInterview').onclick = startNewInterview;
-  $('refreshList').onclick = renderList;
-  $('openSettings').onclick = async () => { 
+
+  if ($('newInterview'))$('newInterview').onclick = startNewInterview;
+  if ($('refreshList'))$('refreshList').onclick = renderList;
+  if ($('openSettings'))$('openSettings').onclick = async () => { 
     hide('home'); show('settings'); 
     const u = await getSetting('supabaseUrl'); 
     const k = await getSetting('supabasePublishableKey'); 
-    $('supabaseUrl').value = u?.value || SUPABASE_URL; 
-    $('supabaseKey').value = k?.value || SUPABASE_PUBLISHABLE_KEY; 
+    if ($('supabaseUrl'))$('supabaseUrl').value = u?.value || SUPABASE_URL; 
+    if ($('supabaseKey'))$('supabaseKey').value = k?.value || SUPABASE_PUBLISHABLE_KEY; 
     await refreshAuthPanel(); 
   };
-  $('backSettings').onclick = () => { hide('settings'); show('home'); renderList(); };$('saveSettings').onclick = async () => { 
-    await saveSupabaseConfig($('supabaseUrl').value.trim(), $('supabaseKey').value.trim());$('settingsMsg').textContent = 'Configuração Supabase salva neste aparelho.'; 
+  if ($('backSettings'))$('backSettings').onclick = () => { hide('settings'); show('home'); renderList(); };
+  if ($('saveSettings'))$('saveSettings').onclick = async () => { 
+    await saveSupabaseConfig($('supabaseUrl').value.trim(),$('supabaseKey').value.trim()); 
+    if ($('settingsMsg'))$('settingsMsg').textContent = 'Configuração Supabase salva neste aparelho.'; 
   };
   document.querySelectorAll('.backHome').forEach(b => b.onclick = () => { hide('setup'); show('home'); renderList(); });
-  $('gpsBtn').onclick = () => { if (!navigator.geolocation) {$('setupMsg').textContent = 'Geolocalização não disponível.'; return; } navigator.geolocation.getCurrentPosition(p => { $('gps').value = `${p.coords.latitude.toFixed(6)}, ${p.coords.longitude.toFixed(6)}`; }, () => $('setupMsg').textContent = 'Não foi possível obter a localização.'); };
-  $('consent').onchange = e => { if (e.target.value === '0')$('setupMsg').textContent = 'Sem consentimento, a aplicação deve ser encerrada.'; else $('setupMsg').textContent = ''; };$('startInterview').onclick = startInterview;
-  $('saveBtn').onclick = async () => { await persist();$('voiceStatus').textContent = '✓ Salvo neste aparelho.'; };
-  $('prevBtn').onclick = () => { if (state.index > 0) { state.index--; renderQuestion(); } };$('nextBtn').onclick = async () => { await persist(); state.index++; renderQuestion(); };
-  $('speakBtn').onclick = () => speak($('qtext').textContent);
-  $('micBtn').onclick = () => { if (!state.recognition) state.recognition = setupRecognition(); if (!state.recognition) {$('voiceStatus').textContent = 'Este Chrome não disponibilizou reconhecimento de fala. Use a gravação de áudio.'; return; } try { state.recognition.start(); } catch (e) {} };
-  $('recordBtn').onclick = toggleRecording;
-  $('exportJson').onclick = exportCurrentJson; $('exportCsv').onclick = exportCurrentCsv; $('exportAudios').onclick = exportCurrentAudios;
-  $('backHomeFinish').onclick = async () => { hide('finish'); show('home'); await renderList(); };$('exportAll').onclick = async () => { const data = await allData(); const audios = []; for (const a of data.audios) audios.push({ ...a, blob: await blobToBase64(a.blob) }); const backup = { format: 'sociobio-backup-v1', createdAt: new Date().toISOString(), interviews: data.interviews, audios }; downloadBlob(new Blob([JSON.stringify(backup)], { type: 'application/json' }), `backup_sociobiodiversidade_${new Date().toISOString().slice(0, 10)}.json`); $('homeMsg').textContent = `Backup criado: ${data.interviews.length} entrevistas e ${audios.length} áudios.`; };
-  $('importBtn').onclick = () => $('importFile').click();$('importFile').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { const payload = JSON.parse(await file.text()); if (payload.format !== 'sociobio-backup-v1') throw new Error('Formato inválido'); const audios = (payload.audios || []).map(a => ({ ...a, blob: base64ToBlob(a.blob, a.mime || 'audio/webm') })); await importData({ interviews: payload.interviews || [], audios }); $('homeMsg').textContent = `Backup restaurado: ${(payload.interviews || []).length} entrevistas.`; await renderList(); } catch (err) { $('homeMsg').textContent = 'Não foi possível restaurar o backup: ' + err.message; } e.target.value = ''; };
-  $('exportAllCsv').onclick = async () => { const items = await listInterviews(); const rows = [['entrevista_id', 'codigo', 'data', 'entrevistador', 'municipio', 'comunidade', 'cadeia', 'status', 'sync_status', 'variavel', 'resposta']]; for (const it of items) for (const [k, v] of Object.entries(it.answers || {})) rows.push([it.id, it.meta.id_quest, it.meta.data, it.meta.entrevistador, it.meta.municipio, it.meta.comunidade, it.meta.cadeiaLabel, it.status, it.syncStatus, k, Array.isArray(v) ? v.join('|') : v]); downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(escapeCsv).join(';')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'entrevistas_sociobiodiversidade.csv'); $('homeMsg').textContent = `CSV geral criado com ${items.length} entrevistas.`; };
-  $('syncBtn').onclick = syncPending;
-  $('loginBtn').onclick = async()=>{try{await signIn($('authEmail').value.trim(),$('authPassword').value);$('settingsMsg').textContent='Login realizado.';await refreshAuthPanel();}catch(e){$('settingsMsg').textContent='Falha no login: '+e.message;}};
-  $('signupBtn').onclick = async()=>{try{await signUp($('authEmail').value.trim(),$('authPassword').value);$('settingsMsg').textContent='Cadastro solicitado. Se a confirmação de e-mail estiver ativa no Supabase, confirme o e-mail antes de entrar.';await refreshAuthPanel();}catch(e){$('settingsMsg').textContent='Falha no cadastro: '+e.message;}};
+  if ($('gpsBtn')) $('gpsBtn').onclick = () => { if (!navigator.geolocation) {$('setupMsg').textContent = 'Geolocalização não disponível.'; return; } navigator.geolocation.getCurrentPosition(p => { $('gps').value = `${p.coords.latitude.toFixed(6)}, ${p.coords.longitude.toFixed(6)}`; }, () => $('setupMsg').textContent = 'Não foi possível obter a localização.'); };
+  if ($('consent')) $('consent').onchange = e => { if (e.target.value === '0')$('setupMsg').textContent = 'Sem consentimento, a aplicação deve ser encerrada.'; else $('setupMsg').textContent = ''; };
+  if ($('startInterview'))$('startInterview').onclick = startInterview;
+  if ($('saveBtn')) $('saveBtn').onclick = async () => { await persist();$('voiceStatus').textContent = '✓ Salvo neste aparelho.'; };
+  if ($('prevBtn'))$('prevBtn').onclick = () => { if (state.index > 0) { state.index--; renderQuestion(); } };
+  if ($('nextBtn'))$('nextBtn').onclick = async () => { await persist(); state.index++; renderQuestion(); };
+  if ($('speakBtn')) $('speakBtn').onclick = () => speak($('qtext').textContent);
+  if ($('micBtn')) $('micBtn').onclick = () => { if (!state.recognition) state.recognition = setupRecognition(); if (!state.recognition) {$('voiceStatus').textContent = 'Este Chrome não disponibilizou reconhecimento de fala. Use a gravação de áudio.'; return; } try { state.recognition.start(); } catch (e) {} };
+  if ($('recordBtn'))$('recordBtn').onclick = toggleRecording;
+  if ($('exportJson'))$('exportJson').onclick = exportCurrentJson; 
+  if ($('exportCsv'))$('exportCsv').onclick = exportCurrentCsv; 
+  if ($('exportAudios'))$('exportAudios').onclick = exportCurrentAudios;
+  if ($('backHomeFinish'))$('backHomeFinish').onclick = async () => { hide('finish'); show('home'); await renderList(); };
+  if ($('exportAll'))$('exportAll').onclick = async () => { const data = await allData(); const audios = []; for (const a of data.audios) audios.push({ ...a, blob: await blobToBase64(a.blob) }); const backup = { format: 'sociobio-backup-v1', createdAt: new Date().toISOString(), interviews: data.interviews, audios }; downloadBlob(new Blob([JSON.stringify(backup)], { type: 'application/json' }), `backup_sociobiodiversidade_${new Date().toISOString().slice(0, 10)}.json`); if ($('homeMsg'))$('homeMsg').textContent = `Backup criado: ${data.interviews.length} entrevistas e ${audios.length} áudios.`; };
+  if ($('importBtn')) $('importBtn').onclick = () =>$('importFile').click();
+  if ($('importFile'))$('importFile').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { const payload = JSON.parse(await file.text()); if (payload.format !== 'sociobio-backup-v1') throw new Error('Formato inválido'); const audios = (payload.audios || []).map(a => ({ ...a, blob: base64ToBlob(a.blob, a.mime || 'audio/webm') })); await importData({ interviews: payload.interviews || [], audios }); if ($('homeMsg'))$('homeMsg').textContent = `Backup restaurado: ${(payload.interviews || []).length} entrevistas.`; await renderList(); } catch (err) { if ($('homeMsg'))$('homeMsg').textContent = 'Não foi possível restaurar o backup: ' + err.message; } e.target.value = ''; };
+  if ($('exportAllCsv'))$('exportAllCsv').onclick = async () => { const items = await listInterviews(); const rows = [['entrevista_id', 'codigo', 'data', 'entrevistador', 'municipio', 'comunidade', 'cadeia', 'status', 'sync_status', 'variavel', 'resposta']]; for (const it of items) for (const [k, v] of Object.entries(it.answers || {})) rows.push([it.id, it.meta.id_quest, it.meta.data, it.meta.entrevistador, it.meta.municipio, it.meta.comunidade, it.meta.cadeiaLabel, it.status, it.syncStatus, k, Array.isArray(v) ? v.join('|') : v]); downloadBlob(new Blob(['\ufeff' + rows.map(r => r.map(escapeCsv).join(';')).join('\n')], { type: 'text/csv;charset=utf-8' }), 'entrevistas_sociobiodiversidade.csv'); if ($('homeMsg'))$('homeMsg').textContent = `CSV geral criado com ${items.length} entrevistas.`; };
+  if ($('syncBtn'))$('syncBtn').onclick = syncPending;
+  if ($('loginBtn'))$('loginBtn').onclick = async()=>{try{await signIn($('authEmail').value.trim(),$('authPassword').value);if ($('settingsMsg'))$('settingsMsg').textContent='Login realizado.';await refreshAuthPanel();}catch(e){if ($('settingsMsg'))$('settingsMsg').textContent='Falha no login: '+e.message;}};
+  if ($('signupBtn'))$('signupBtn').onclick = async()=>{try{await signUp($('authEmail').value.trim(),$('authPassword').value);if ($('settingsMsg'))$('settingsMsg').textContent='Cadastro solicitado. Se a confirmação de e-mail estiver ativa no Supabase, confirme o e-mail antes de entrar.';await refreshAuthPanel();}catch(e){if ($('settingsMsg'))$('settingsMsg').textContent='Falha no cadastro: '+e.message;}};
+  
   if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
 
